@@ -1,0 +1,40 @@
+PROCEDURE array_of_cards (VAR n : INTEGER, VAR hand : ARRAY_OF INTEGER)
+VAR
+    j : INTEGER;
+BEGIN
+    // Read number of cards 
+    REPEAT
+        Write("Enter the number of cards :");
+        Read(n);
+    UNTIL (n <= 0)
+    // Read cards 
+    FOR j FROM 0 TO n-1 STEP 1  DO
+        Write("Take new card in your hand :");
+        Read(hand[j]);
+    END_FOR
+END
+
+PROCEDURE sort_cards (VAR hand : ARRAY_OF INTEGER, pos : INTEGER, value : INTEGER)
+VAR
+    j : INTEGER;
+BEGIN
+    j = pos-1;
+    WHILE (j >= 0 AND hand[j] > value) DO
+        hand[j+1] = hand[j];
+        j = j-1;
+    END_WHILE
+    hand[j+1] = value;
+END
+
+ALGORITHM Insertion Sort
+VAR
+    i,n : INTEGER;
+    hand : ARRAY_OF INTEGER[];
+BEGIN
+    // Read array of cards 
+    array_of_cards (n, hand);
+    // Insertion Sort of cards
+    FOR i FROM 1 TO n-1 STEP 1  DO
+        sort_cards (hand, i, hand[i]);
+    END_FOR
+END
